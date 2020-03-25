@@ -2,11 +2,31 @@ pipeline {
   agent any
   stages {
     stage('Test') {
-      steps {
-        container(name: 'go', shell: 'bash') {
-          sh 'go test'
+      parallel {
+        stage('Test') {
+          steps {
+            container(name: 'go', shell: 'sh') {
+              sh 'go test'
+            }
+
+          }
         }
 
+        stage('Build') {
+          steps {
+            container(name: 'go', shell: 'sh') {
+              sh 'go build -o compiled'
+            }
+
+          }
+        }
+
+      }
+    }
+
+    stage('asf') {
+      steps {
+        archiveArtifacts 'compiled'
       }
     }
 
