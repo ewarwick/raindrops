@@ -6,7 +6,7 @@ pipeline {
         stage('Test') {
           steps {
             container(name: 'go', shell: 'sh') {
-              sh 'go test'
+              sh 'go test ./cmd'
             }
 
           }
@@ -15,7 +15,7 @@ pipeline {
         stage('Build') {
           steps {
             container(name: 'go', shell: 'sh') {
-              sh 'go build -o compiled'
+              sh 'go build -o compiled ./cmd'
             }
 
           }
