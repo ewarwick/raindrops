@@ -110,11 +110,11 @@ func TestIncidents(t *testing.T) {
 	if incidents == nil || len(incidents) == 0 {
 		assert.Fail(t, "Should have returned results")
 	}
-	time, _ := time.Parse("1/2/2006 at 3:04pm (MST)", "10/18/2019 at 3:04pm (MST)")
+	time, _ := time.Parse("1/2/2006 at 3:04pm (MST)", "10/18/2020 at 3:04pm (MST)")
 
 	assert.Equal(t, 17, len(incidents), "Should have 17 records")
 	assert.Equal(t, time, incidents[5].Time)
 	assert.Equal(t, "RCA - Authentication issues with Azure MFA in North America", incidents[5].Description)
-	assert.Equal(t, "2019-10-18 15:04:00 +0000 MST RCA - Authentication issues with Azure MFA in North America", incidents[5].Identifier)
+	assert.Equal(t, "2020-10-18 15:04:00 +0000 MST RCA - Authentication issues with Azure MFA in North America", incidents[5].Identifier)
 
 }
