@@ -1,6 +1,8 @@
 
   podTemplate(containers:[containerTemplate(name:'go', image:'golang:latest',ttyEnabled: true, command: 'cat')]) {
-    stage('Test') {
+
+node(POD_LABEL){
+
       parallel {
         stage('Test') {
           steps {
@@ -23,7 +25,6 @@ go tool cover -html=c.out -o ./testresults/coverage.html'''
           }
         }
 
-      }
     }
 
     stage('asf') {
@@ -46,5 +47,5 @@ go tool cover -html=c.out -o ./testresults/coverage.html'''
 
       }
     }
-
+}
   }
