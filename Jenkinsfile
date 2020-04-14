@@ -2,7 +2,9 @@
   podTemplate(containers:[containerTemplate(name:'go', image:'golang:latest',ttyEnabled: true, command: 'cat')]) {
 
 node(POD_LABEL){
-
+	stage('git'){
+git 'git@github.com:ewarwick/raindrops.git'
+}
       parallel (
         'test': {
             container(name: 'go', shell: 'sh') {
