@@ -5,7 +5,6 @@ node(POD_LABEL){
 
       parallel (
         'test': {
-          steps {
             container(name: 'go', shell: 'sh') {
               sh '''mkdir testresults
 go get gotest.tools/gotestsum
@@ -13,16 +12,13 @@ gotestsum --junitfile ./testresults/unit-tests.xml -- -coverprofile=c.out ./...
 go tool cover -html=c.out -o ./testresults/coverage.html'''
             }
 
-          }
         },
 
         'Build': {
-          steps {
             container(name: 'go', shell: 'sh') {
               sh 'go build -o compiled ./cmd'
             }
 
-          }
         }
 
     )
