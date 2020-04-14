@@ -3,22 +3,24 @@
 
 node(POD_LABEL){
 	stage('git'){
-git 'git@github.com:ewarwick/raindrops.git'
+//git 'git@github.com:ewarwick/raindrops.git'
 }
       parallel (
         'test': {
             container(name: 'go', shell: 'sh') {
-              sh '''mkdir testresults
-go get gotest.tools/gotestsum
-gotestsum --junitfile ./testresults/unit-tests.xml -- -coverprofile=c.out ./...
-go tool cover -html=c.out -o ./testresults/coverage.html'''
-            }
+//              sh '''mkdir testresults
+//go get gotest.tools/gotestsum
+//gotestsum --junitfile ./testresults/unit-tests.xml -- -coverprofile=c.out ./...
+//go tool cover -html=c.out -o ./testresults/coverage.html'''
+sh 'ls'
+sh 'pwd' 
+           }
 
         },
 
         'Build': {
             container(name: 'go', shell: 'sh') {
-              sh 'go build -o compiled ./cmd'
+       //       sh 'go build -o compiled ./cmd'
             }
 
         }
