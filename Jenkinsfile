@@ -1,6 +1,8 @@
+
+
 pipeline {
   agent any
-  stages {
+  podTemplate(containers:[contaierTemplate(name:'go', image:'golang:latest',ttyEnabled: true, command: 'cat')]) {
     stage('Test') {
       parallel {
         stage('Test') {
