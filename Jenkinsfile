@@ -8,19 +8,17 @@ checkout scm
       parallel (
         'test': {
             container(name: 'go', shell: 'sh') {
-//              sh '''mkdir testresults
-//go get gotest.tools/gotestsum
-//gotestsum --junitfile ./testresults/unit-tests.xml -- -coverprofile=c.out ./...
-//go tool cover -html=c.out -o ./testresults/coverage.html'''
-sh 'ls'
-sh 'pwd' 
+              sh '''mkdir testresults
+go get gotest.tools/gotestsum
+gotestsum --junitfile ./testresults/unit-tests.xml -- -coverprofile=c.out ./...
+go tool cover -html=c.out -o ./testresults/coverage.html'''
            }
 
         },
 
         'Build': {
             container(name: 'go', shell: 'sh') {
-       //       sh 'go build -o compiled ./cmd'
+              sh 'go build -o compiled ./cmd'
             }
 
         }
@@ -28,7 +26,6 @@ sh 'pwd'
     )
 
     stage('asf') {
-      steps {
         archiveArtifacts 'compiled'
         junit(testResults: 'testresults/*.xml', keepLongStdio: true)
         script {
@@ -43,7 +40,6 @@ sh 'pwd'
               reportName: "SimpleCov Report"
             ])
           }
-        }
 
       }
     }
