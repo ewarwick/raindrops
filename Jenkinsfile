@@ -3,7 +3,7 @@
 
 node(POD_LABEL){
 	stage('git'){
-//git 'git@github.com:ewarwick/raindrops.git'
+checkout scm
 }
       parallel (
         'test': {
