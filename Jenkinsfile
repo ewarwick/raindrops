@@ -8,7 +8,8 @@ pipeline {
         stage('Test') {
           steps {
             container(name: 'go', shell: 'sh') {
-              sh '''go get gotest.tools/gotestsum
+              sh '''mkdir testresults
+go get gotest.tools/gotestsum
 gotestsum --junitfile ./testresults/unit-tests.xml -- -coverprofile=c.out ./...
 go tool cover -html=c.out -o ./testresults/coverage.html'''
             }
