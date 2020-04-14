@@ -1,7 +1,4 @@
 
-
-pipeline {
-  agent any
   podTemplate(containers:[contaierTemplate(name:'go', image:'golang:latest',ttyEnabled: true, command: 'cat')]) {
     stage('Test') {
       parallel {
@@ -51,4 +48,3 @@ go tool cover -html=c.out -o ./testresults/coverage.html'''
     }
 
   }
-}
